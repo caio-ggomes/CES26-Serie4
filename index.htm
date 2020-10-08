@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Série 4</title>
+        <script src="jquery-1.12.4.min.js"></script>
+    </head>
+    <body>
+        <div id='studentId'>
+            <h1>Aluno: Caio Graça Gomes<br>Turma: COMP-22</h1>
+        </div>
+        
+        <br>
+        
+        <h3>Seleção de arquivo estático + Processamento de Formulário:</h3>
+        <br>
+        <form action="http://127.0.0.1:8081/soccer_logos" method="GET">
+            <label for='logo'>Escolha um escudo de um time de futebol paulista para ser apresentado</label>
+            <select id='logo' name='logo'>
+                <option value='corinthians'>Corinthians</option>
+                <option value='palmeiras'>Palmeiras</option>
+                <option value='sao_paulo'>São Paulo</option>
+                <option value='santos'>Santos</option>
+            </select>
+            <input type='submit' value='Solicitar'>
+        </form>
+        
+        <h3>Upload de arquivo:</h3>
+        Selecione um arquivo para fazer upload:<br><br>
+        <form action="http://127.0.0.1:8081/file_upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" size="50">
+            <br><br>
+            <input type="submit" value="Upload File">
+        </form>
+
+        <br>
+
+        <h3>Aplicação AJAX</h3>
+
+        <form action="http://127.0.0.1:8081/titles" method="POST" id="titlesForm">
+            <input id="titlesButton" type="submit" value="Títulos dos Grandes Paulistas">
+        </form>
+
+        <script>
+            $("#titlesForm").submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "http://127.0.0.1:8081/titles",
+                    type: "POST",
+                    data: {
+                        'city': 'pune',
+                        'country': 'India',
+                    },
+                    success: function(data){
+                        console.log(data);
+                    }
+                });
+            });
+
+        </script>
+    </body>
+</html>
